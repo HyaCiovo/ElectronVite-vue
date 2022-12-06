@@ -4,12 +4,12 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <!-- <PageHeader /> -->
+  <PageHeader />
   <RouterView class="context" />
 </template>
 
 <style>
-/* .context {
+.context {
   top: 102px;
-} */
+}
 </style>

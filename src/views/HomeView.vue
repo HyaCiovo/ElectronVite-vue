@@ -2,9 +2,9 @@
 import HomeCard from "@/components/HomeCard.vue";
 import AutoTable from "@/components/AutoTable.vue";
 import { useRouter } from "vue-router";
-import { onMounted } from "vue";
+// import { onMounted } from "vue";
 const router = useRouter();
-onMounted(() => { router.replace({ name: 'canvas' }) })
+// onMounted(() => { router.replace({ name: 'canvas' }) })
 </script>
 
 <template>

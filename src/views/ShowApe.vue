@@ -78,9 +78,8 @@ const fetchToken = async () => {
     client_secret: '4xTlW81w537v21mRbuiLRSN0HKhgQbjH',
     grant_type: 'client_credentials'
   }
-  const res = await axios.get<any>("/baiduapi/oauth/2.0/token", params);
-  accessToken.value = (<any>res).access_token
-  console.log(accessToken.value)
+  const res: any = await axios.get<any>("/baiduapi/oauth/2.0/token", params);
+  accessToken.value = res.access_token
 }
 
 const addFace = async () => {
@@ -94,6 +93,7 @@ const addFace = async () => {
   const res = await axios.post<any>(
     `/baiduapi/rest/2.0/face/v3/faceset/user/add?accessToken=${accessToken.value}`,
     params)
+  console.log(res)
 }
 //设置video canvas宽高
 const setVideoConfig = () => {
@@ -158,19 +158,19 @@ const close = () => {
   data.scanTip = "人脸识别中...";
   clearTimeout(data.removePhotoID);
   if (data.streamIns) {
-    (data.streamIns as any).enabled = false;
-    (data.streamIns as any).getTracks()[0].stop();
-    (data.streamIns as any).getVideoTracks()[0].stop();
+    data.streamIns.enabled = false;
+    data.streamIns.getTracks()[0].stop();
+    data.streamIns.getVideoTracks()[0].stop();
   }
   data.streamIns = null;
-  (data.trackertask as any).stop();
+  data.trackertask.stop();
   data.tracker = null;
 };
 
 // 拍照
 const takePhoto = () => {
   // 在画布上面绘制拍到的照片
-  (data.context as any).drawImage(
+  data.context.drawImage(
     document.getElementById("video"),
     0,
     0,
@@ -213,16 +213,16 @@ const imgSize = () => {
   }
 };
 // Base64转文件
-const getBlobBydataURI = (dataURI: any, type: any) => {
-  const binary = window.atob(dataURI.split(",")[1]);
-  const array = [];
-  for (let i = 0; i < binary.length; i++) {
-    array.push(binary.charCodeAt(i));
-  }
-  return new Blob([new Uint8Array(array)], {
-    type: type,
-  });
-};
+// const getBlobBydataURI = (dataURI: any, type: any) => {
+//   const binary = window.atob(dataURI.split(",")[1]);
+//   const array = [];
+//   for (let i = 0; i < binary.length; i++) {
+//     array.push(binary.charCodeAt(i));
+//   }
+//   return new Blob([new Uint8Array(array)], {
+//     type: type,
+//   });
+// };
 
 // 保存为png,base64格式图片
 const saveAsPNG = (c: any) => {
@@ -232,20 +232,20 @@ const saveAsPNG = (c: any) => {
 // 人脸捕捉 设置各种参数 实例化人脸捕捉实例对象,注意canvas上面的动画效果。
 const initTracker = () => {
   data.context = (document.getElementById("refCanvas") as any)?.getContext("2d"); // 画布
-  (data.canvas as any) = document.getElementById("refCanvas");
+  data.canvas = document.getElementById("refCanvas");
   data.tracker = new (window as any).tracking.ObjectTracker("face"); // tracker实例
-  (data.tracker as any).setInitialScale(4);
-  (data.tracker as any).setStepSize(2); // 设置步长
-  (data.tracker as any).setEdgesDensity(0.1);
+  data.tracker.setInitialScale(4);
+  data.tracker.setStepSize(2); // 设置步长
+  data.tracker.setEdgesDensity(0.1);
   try {
     data.trackertask = (window as any).tracking.track("#video", data.tracker); // 开始追踪
   } catch (e) {
     data.scanTip = "访问用户媒体失败，请重试";
   }
   //开始捕捉方法 一直不停的检测人脸直到检测到人脸
-  (data.tracker as any).on("track", (e: any) => {
+  data.tracker.on("track", (e: any) => {
     //画布描绘之前清空画布
-    (data.context as any).clearRect(0, 0, data.canvas?.width, data.canvas?.height);
+    data.context.clearRect(0, 0, data.canvas?.width, data.canvas?.height);
     if (e.data.length === 0) {
       if (!data.flag)
         data.scanTip = "未检测到人脸";
@@ -306,7 +306,6 @@ const playVideo = () => {
   });
 };
 onMounted(() => {
-  console.log(nanoid())
   fetchToken();
   setVideoConfig();
 });
