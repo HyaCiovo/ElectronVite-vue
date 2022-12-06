@@ -9,7 +9,7 @@ import { RouterView } from "vue-router";
 </template>
 
 <style>
-.context {
+/* .context {
   top: 102px;
-}
+} */
 </style>
