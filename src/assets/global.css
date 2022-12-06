@@ -1,0 +1,14 @@
+.el-popper {
+  word-break: keep-all;
+}
+
+.nowrap {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.text-label {
+  color: rgb(153 153 153);
+  font-weight: 400;
+}
