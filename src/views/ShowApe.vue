@@ -75,7 +75,7 @@ const accessToken = ref<number>()
 const fetchToken = async () => {
   const params = {
     client_id: 'zSj9cXM0sPv9EFmvV4H9EAhs',
-    client_secret: '4xTlW81w537v21mRbuiLRSN0HKhgQbjH',
+    client_secret: '',
     grant_type: 'client_credentials'
   }
   const res: any = await axios.get<any>("/baiduapi/oauth/2.0/token", params);
@@ -357,7 +357,7 @@ onMounted(() => {
 
     .rect {
       border: 2px solid #0aeb08;
-      position: fixed;
+      position: absolute;
       z-index: 4;
     }
 

@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "vite",
+    "build-docker": "docker build -t my-vue .",
+    "dev-docker": "docker run -d -p 8081:8081 my-vue",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -12,7 +14,6 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
-    "@vitejs/plugin-basic-ssl": "^0.1.2",
     "axios": "^1.2.0",
     "element-plus": "^2.2.25",
     "html2canvas": "^1.4.1",
